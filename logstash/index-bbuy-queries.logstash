@@ -5,6 +5,7 @@ input {
   }
 }
 
+
 filter {
   csv {
     autodetect_column_names => true

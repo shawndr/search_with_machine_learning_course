@@ -1,5 +1,114 @@
 {
   "settings": {
     "index.refresh_interval": "5s"
+  },
+  "mappings" : {
+    "properties" : {
+      "active" : {
+        "type" : "boolean"
+      },
+      "categoryLeaf" : {
+        "type" : "keyword"
+      },
+      "categoryPath" : {
+        "type" : "keyword"
+      },
+      "categoryPathCount" : {
+        "type" : "integer"
+      },
+      "categoryPathIds" : {
+        "type" : "keyword"
+      },
+      "digital" : {
+        "type" : "boolean"
+      },
+      "image" : {
+        "type" : "keyword"
+      },
+      "inStoreAvailability" : {
+        "type" : "boolean"
+      },
+      "longDescription" : {
+        "type" : "text",
+        "analyzer": "english",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 2048
+          }
+        }
+      },
+      "shortDescription": {
+        "type": "text",
+        "analyzer": "english",
+        "fields": {
+            "keyword": {
+                "type": "keyword",
+                "ignore_above": 1024
+            }
+        }
+      },
+      "name" : {
+        "type" : "text",
+        "analyzer": "english",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
+      },
+      "onSale" : {
+        "type" : "boolean"
+      },
+      "onlineAvailability" : {
+        "type" : "boolean"
+      },
+      "productId" : {
+        "type" : "keyword"
+      },
+      "regularPrice" : {
+        "type" : "float"
+      },
+      "salePrice" : {
+        "type" : "float"
+      },
+      "sku" : {
+        "type" : "keyword"
+      },
+      "startDate" : {
+        "type" : "date"
+      },
+      "tags" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
+      },
+      "type" : {
+        "type" : "keyword"
+      },
+      "url" : {
+        "type" : "keyword"
+      },
+      "salesRankShortTerm": {
+        "type": "integer"
+      },
+      "department": {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
+      },
+      "departmentId": {
+        "type": "keyword"
+      }
+    }
   }
 }
