@@ -97,6 +97,12 @@
       "salesRankShortTerm": {
         "type": "integer"
       },
+      "salesRankMediumTerm": {
+        "type": "integer"
+      },
+      "salesRankLongTerm": {
+        "type": "integer"
+      },
       "department": {
         "type" : "text",
         "fields" : {

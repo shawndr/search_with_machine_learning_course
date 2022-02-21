@@ -101,16 +101,40 @@ def create_query(user_query, filters, sort="_score", sortDir="desc"):
     print("Query: {} Filters: {} Sort: {}".format(user_query, filters, sort))
 
     if user_query == '*':
-        query_strategy = {
+        match_strategy = {
             "match_all": {}
         }
     else:
-        query_strategy = {
+        match_strategy = {
             "multi_match": {
                 "query": user_query,
                 "fields": ["name^100", "shortDescription^50", "longDescription^10", "department"]            
             }
         }
+
+    func_strategy = [
+        {
+            "field_value_factor": {
+                "field": "salesRankShortTerm",
+                "modifier": "reciprocal",
+                "missing": 100000000
+           }
+        },
+        {
+            "field_value_factor": {
+                "field": "salesRankMediumTerm",
+                "modifier": "reciprocal",
+                "missing": 100000000
+            }
+        },
+        {
+            "field_value_factor": {
+                "field": "salesRankLongTerm",
+                "modifier": "reciprocal",
+                "missing": 100000000
+            }
+        }       
+    ]
 
     aggs = {
         "regularPrice": {
@@ -145,9 +169,16 @@ def create_query(user_query, filters, sort="_score", sortDir="desc"):
             {sort: sortDir}
         ],
         "query": {
-            "bool": {
-                "must": [query_strategy],
-                "filter": filters
+            "function_score": {
+                "query": {
+                    "bool": {
+                        "must": [match_strategy],
+                        "filter": filters
+                    }
+                },                
+                "boost_mode": "multiply",
+                "score_mode": "avg",
+                "functions": func_strategy
             }
         },
         "aggs": aggs
