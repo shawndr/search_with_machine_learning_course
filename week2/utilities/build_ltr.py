@@ -4,6 +4,9 @@
 #
 ###
 
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
+
 import argparse
 import json
 import os

@@ -11,3 +11,4 @@ numexpr
 sklearn
 graphviz
 matplotlib
+jupyterlab
